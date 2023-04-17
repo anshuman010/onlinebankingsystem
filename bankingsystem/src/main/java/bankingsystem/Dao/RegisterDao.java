@@ -25,7 +25,7 @@ public class RegisterDao {
 	
 	@Autowired
 private HibernateTemplate hibernateTemplate;
-	private static int nextAccountNumber = 11223145;
+	private  int nextAccountNumber = 11223145;
 	@Transactional
 	public void save(UserAccount account) {
 		this.hibernateTemplate.saveOrUpdate(account);
@@ -42,6 +42,25 @@ private HibernateTemplate hibernateTemplate;
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Transactional
+	public String Registercheck(String username) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+				
+		Query theQuery = currentSession.createQuery("from UserAccount u where u.username=:username");
+		theQuery.setParameter("username", username);
+		
+
+		List results = theQuery.list();
+		
+		if ((results!=null) && (results.size()>0)){
+			return "success";
+		}
+		else {
+		return "failed";
+	}
+		
+}
 	@Transactional
 	public String loginCheck(String username, String password) {
 		

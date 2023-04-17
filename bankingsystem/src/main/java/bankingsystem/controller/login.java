@@ -38,13 +38,23 @@ public String register() {
 @RequestMapping(value="/registerpost",method=RequestMethod.POST)
 public String registeruser(@ModelAttribute("registerpost") UserAccount account,Model m) {
 	System.out.println("hello");
-	this.dao.save(account);
-	
-	UserAccount acc=this.dao.get(account.getUsername());
-	PrimaryAccount pm=new PrimaryAccount();
-	pm.setAccountID(acc.getCustomerID());
-	this.dao.savep(pm);
-	return "home";
+	String user = account.getUsername();
+	System.out.println(user);
+	String userlogin = this.dao.Registercheck(account.getUsername());
+	if(userlogin.equals("success"))
+	{m.addAttribute("message", "Username Already Exist Try Different Username");
+	return "register";}
+	else {
+		this.dao.save(account);
+		
+		UserAccount acc=this.dao.get(account.getUsername());
+		PrimaryAccount pm=new PrimaryAccount();
+		pm.setAccountID(acc.getCustomerID());
+		this.dao.savep(pm);
+		return "home";
+		
+	}
+		
 }
 @RequestMapping(value = "/login", method = RequestMethod.POST)
 public String loginSuccess(HttpServletRequest request, HttpServletResponse response, HttpSession session,

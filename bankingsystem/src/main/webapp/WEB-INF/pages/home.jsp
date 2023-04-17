@@ -145,7 +145,7 @@
 
 		<form action="login/${User.customerID }" modelAttribute="login" method="post">
 			<h5>Log on to Online Banking</h5>
-			<div class=""panel-body"">
+			<div class="panel-body">
 				<label for="exampleInputEmail1">User Name</label> <input
 					type="text" name="username" class="form-control"
 					id="exampleInputEmail1" aria-describedby="emailHelp"

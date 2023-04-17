@@ -17,6 +17,7 @@ public class UserAccount {
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	
 	private Long customerID;
+	@Column(nullable = false, unique = true)
 	   private String username;
 	    private String password;
 	    private String firstName;
